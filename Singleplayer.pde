@@ -1,65 +1,27 @@
-String mode = "N/A";
+boolean ActiveGame = false;
 
 class Singleplayer {
 
-  void main() {
-    modes.main();
-    if (gamestate == 10); //d
-    if (gamestate == 11); //d
-    if (gamestate == 12); //d
-  }
-}
-
-
-
-class Modes {
-  boolean clickable = false;
-  void main() {
-    println(clickable);
-    background(modestate);
+  void startGame() {
+    ActiveGame = true;
+    background(game);
     Actions();
+    bc.main();
+    c.main();
   }
+
 
   void Actions() {
-    if (isMouseClicked) {
-      if (onButtonClickEvent(mouseX, mouseY, 748, 411, 425, 91)) {
-        if (clickable) {
-          sound.onClick();
-          easy();
-        }
-      }
-      if (onButtonClickEvent(mouseX, mouseY, 748, 583, 425, 91)) {
-        if (clickable) {
-          sound.onClick();
-          medium();
-        }
-      }
-      if (onButtonClickEvent(mouseX, mouseY, 748, 755, 425, 91)) {
-        if (clickable) {
-          sound.onClick();
-          hard();
-        }
-      }
+    if (onButtonClickEvent(mouseX, mouseY, 123, 921, 177, 38)) {
+      ActiveGame = false;
+      modes.clickable = false;
+      sound.onClick();
+      gamestate = 2;
     }
-    if (onButtonHoverEvent(mouseX, mouseY, 748, 411, 425, 91)) image(easy, 748, 411);
-    if (onButtonHoverEvent(mouseX, mouseY, 748, 583, 425, 91)) image(medium, 748, 583);
-    if (onButtonHoverEvent(mouseX, mouseY, 748, 755, 425, 91)) image(hard, 748, 755);
+
+    if (onButtonHoverEvent(mouseX, mouseY, 123, 921, 177, 38)) image(leave, 123, 921);
   }
 
-  void easy() {
-    mode = "easy";
-  //  gamestate = 10;
-  }
-
-  void medium() {
-    mode = "medium";
-  //  gamestate = 11;
-  }
-
-  void hard() {
-    mode = "hard";
-  //  gamestate = 12;
-  }
 
   boolean onButtonHoverEvent(float px, float py, float rx, float ry, float rw, float rh) {
     if (px > rx && px < rx + rw) {
@@ -82,6 +44,25 @@ class Modes {
   }
 }
 
-void mouseMoved() {
-  if (gamestate == 3) modes.clickable = true;
+class Broadcast {
+  int x = 200, xnew, size, y, j;
+  String[] broadcastMessages = {"Created by github.com/Sh1tters", "Guess Or Die BETA", "Crappy Entertainment"};
+
+  Broadcast() {
+    x = 1450;
+    size = 20;
+    y = 1038;
+    j = 0;
+  }
+
+  void main() {
+    textSize(size);
+    text(broadcastMessages[j], x, y);
+    x -= 2;
+    if (x < 172) {
+      j++;
+      x = 1450;
+      if (j >= broadcastMessages.length) j = 0;
+    }
+  }
 }

@@ -16,7 +16,10 @@ GameStateMenu menu = new GameStateMenu();
 menuHandler menuHandler = new menuHandler();
 SoundEffects sound = new SoundEffects();
 Modes modes = new Modes();
+SingleplayerHandler spHandler = new SingleplayerHandler();
 Singleplayer sp = new Singleplayer();
+Broadcast bc = new Broadcast();
+Clock c = new Clock();
 
 
 
@@ -28,7 +31,7 @@ void setup() {
   onClick = new SoundFile(this, "onClickSound.wav");
   onError = new SoundFile(this, "onErrorSound.wav");
   gamemusic = new SoundFile(this, "gamemusic.wav");
-  
+
   gamemusic.play();
   gamemusic.loop();
   gamemusic.amp(0.2);
@@ -43,7 +46,8 @@ void GameStateHandler() {
   if (gamestate == 0) idle();
   if (gamestate == 1) selectName();
   if (gamestate == 2) menu.startup(username);
-  if (gamestate == 3) sp.main();
+  if (gamestate == 3) spHandler.main();
+  if (gamestate == 10) sp.startGame();
 }
 
 void selectName() {
@@ -132,6 +136,6 @@ class idleHandler {
   }
 }
 
-void mousePressed(){
- isMouseClicked = true; 
+void mousePressed() {
+  isMouseClicked = true;
 }

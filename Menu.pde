@@ -28,6 +28,7 @@ class GameStateMenu {
 class menuHandler {
 
   void Actions() {
+
     if (onButtonClickEvent(mouseX, mouseY, 748, 353, 425, 91)) {
       sound.onClick();
       gamestate = 3;
