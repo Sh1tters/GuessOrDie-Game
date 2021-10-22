@@ -1,5 +1,4 @@
 String mode = "N/A";
-boolean clickable = false;
 
 class Singleplayer {
 
@@ -14,46 +13,52 @@ class Singleplayer {
 
 
 class Modes {
-
+  boolean clickable = false;
   void main() {
+    println(clickable);
     background(modestate);
     Actions();
   }
 
   void Actions() {
-    if (clickable) {
+    if (isMouseClicked) {
       if (onButtonClickEvent(mouseX, mouseY, 748, 411, 425, 91)) {
-        sound.onClick();
-        easy();
+        if (clickable) {
+          sound.onClick();
+          easy();
+        }
       }
       if (onButtonClickEvent(mouseX, mouseY, 748, 583, 425, 91)) {
-        sound.onClick();
-        medium();
+        if (clickable) {
+          sound.onClick();
+          medium();
+        }
       }
       if (onButtonClickEvent(mouseX, mouseY, 748, 755, 425, 91)) {
-        sound.onClick();
-        hard();
+        if (clickable) {
+          sound.onClick();
+          hard();
+        }
       }
     }
     if (onButtonHoverEvent(mouseX, mouseY, 748, 411, 425, 91)) image(easy, 748, 411);
     if (onButtonHoverEvent(mouseX, mouseY, 748, 583, 425, 91)) image(medium, 748, 583);
     if (onButtonHoverEvent(mouseX, mouseY, 748, 755, 425, 91)) image(hard, 748, 755);
-    clickable = true;
   }
 
   void easy() {
     mode = "easy";
-    gamestate = 10;
+  //  gamestate = 10;
   }
 
   void medium() {
     mode = "medium";
-    gamestate = 11;
+  //  gamestate = 11;
   }
 
   void hard() {
     mode = "hard";
-    gamestate = 12;
+  //  gamestate = 12;
   }
 
   boolean onButtonHoverEvent(float px, float py, float rx, float ry, float rw, float rh) {
@@ -66,7 +71,7 @@ class Modes {
   }
 
   boolean onButtonClickEvent(float px, float py, float rx, float ry, float rw, float rh) {
-    if (clickable) {
+    if (isMouseClicked) {
       if (px > rx && px < rx + rw) {
         if (py > ry && py < ry + rh) {
           return true;
@@ -75,4 +80,8 @@ class Modes {
     }
     return false;
   }
+}
+
+void mouseMoved() {
+  if (gamestate == 3) modes.clickable = true;
 }

@@ -30,8 +30,6 @@ class menuHandler {
   void Actions() {
     if (onButtonClickEvent(mouseX, mouseY, 748, 353, 425, 91)) {
       sound.onClick();
-      isMouseClicked = false;
-      delay(2000);
       gamestate = 3;
     }
     if (onButtonClickEvent(mouseX, mouseY, 748, 504, 425, 91)) {

@@ -35,7 +35,6 @@ void setup() {
 }
 
 void draw() {
-  println(isMouseClicked);
   GameStateHandler();
   isMouseClicked = false;
 }
@@ -133,6 +132,6 @@ class idleHandler {
   }
 }
 
-void mouseReleased(){
+void mousePressed(){
  isMouseClicked = true; 
 }
