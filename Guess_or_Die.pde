@@ -1,5 +1,7 @@
 import processing.sound.*;
-SoundFile onClick, onError, gamemusic;
+SoundFile onClick, onError, gamemusic, countdown, ticktock;
+
+float gamemusicAMP = 0.2;
 
 int gamestate;
 String username;
@@ -31,10 +33,12 @@ void setup() {
   onClick = new SoundFile(this, "onClickSound.wav");
   onError = new SoundFile(this, "onErrorSound.wav");
   gamemusic = new SoundFile(this, "gamemusic.wav");
+  countdown = new SoundFile(this, "onCountDownSound.wav");
+  ticktock = new SoundFile(this, "onTickTockTimerSound.wav");
 
   gamemusic.play();
   gamemusic.loop();
-  gamemusic.amp(0.2);
+  gamemusic.amp(gamemusicAMP);
 }
 
 void draw() {

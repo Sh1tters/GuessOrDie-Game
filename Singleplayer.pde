@@ -1,25 +1,94 @@
+import java.util.concurrent.*;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
 boolean ActiveGame = false;
+boolean third = false, second = false, first = false, end = false, countDownTimerActive = false;
 
 class Singleplayer {
 
+
+  int countdownStarter = 4;
+
   void startGame() {
-    ActiveGame = true;
-    background(game);
-    Actions();
-    bc.main();
-    c.main();
+    if (!ActiveGame) {
+      background(game);
+      bc.main();
+      Actions();
+    } else if (ActiveGame) {
+      background(game);
+      bc.main();
+      Actions();
+      c.main();
+      sound.onTickTock();
+    }
   }
 
 
   void Actions() {
+    if (third)             image(three, 827, 220);
+    if (second)             image(two, 827, 220);
+    if (first)             image(one, 827, 220);
+    if (end)             image(go, 544, 258);
+
     if (onButtonClickEvent(mouseX, mouseY, 123, 921, 177, 38)) {
-      ActiveGame = false;
       modes.clickable = false;
       sound.onClick();
       gamestate = 2;
+      ActiveGame = false;
+      countDownTimerActive = false;
     }
 
     if (onButtonHoverEvent(mouseX, mouseY, 123, 921, 177, 38)) image(leave, 123, 921);
+
+
+    // countdown to start
+    if (!ActiveGame) {
+      countDownTimerActive = true;
+      //Start count down
+      final Runnable runnable = new Runnable() {
+
+        public void run() {
+          if (countdownStarter < 4) sound.onTick();
+          if (countdownStarter == 3) {
+            third = true;
+            second = false;
+            first = false;
+            end = false;
+          }
+          if (countdownStarter == 2) {
+            third = false;
+            second = true;
+            first = false;
+            end = false;
+          }
+          if (countdownStarter == 1) {
+            third = false;
+            second = false;
+            first = true;
+            end = false;
+          }
+          delay(1000);
+          countdownStarter--;
+
+
+          if (countdownStarter == 0) {
+            third = false;
+            second = false;
+            first = false;
+            end = true;
+            delay(1000);
+            countdown.stop();
+            end = false;
+            ActiveGame = true;
+            countDownTimerActive = false;
+          }
+        }
+      };
+      scheduler.scheduleAtFixedRate(runnable, 0, 1, SECONDS);
+    }
   }
 
 
@@ -46,7 +115,7 @@ class Singleplayer {
 
 class Broadcast {
   int x = 200, xnew, size, y, j;
-  String[] broadcastMessages = {"Created by github.com/Sh1tters", "Guess Or Die BETA", "Crappy Entertainment"};
+  String[] broadcastMessages = {"Created by github.com/Sh1tters"};
 
   Broadcast() {
     x = 1450;

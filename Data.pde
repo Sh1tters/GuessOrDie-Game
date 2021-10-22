@@ -1,4 +1,4 @@
-PImage startgame, stateEnterName, stateEnterNameButton, Menu, credits, settings, singleplayer, easy, medium, hard, modestate, game, back, leave;
+PImage startgame, stateEnterName, stateEnterNameButton, Menu, credits, settings, singleplayer, easy, medium, hard, modestate, game, back, leave, three, two, one, go;
 class Data {
   
  void onLoadData(){
@@ -16,6 +16,10 @@ class Data {
    game = loadImage("game.png");
    back = loadImage("back.png");
    leave = loadImage("leave.png");
+   three = loadImage("3.png");
+   two = loadImage("2.png");
+   one = loadImage("1.png");
+   go = loadImage("GO!.png");
  }
   
 }

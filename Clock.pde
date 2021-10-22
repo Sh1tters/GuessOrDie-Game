@@ -30,7 +30,7 @@ class Clock {
     strokeWeight(1);
     line(cx, cy, cx + cos(s) * secondsRadius, cy + sin(s) * secondsRadius);
     
+    // refill to white
     fill(255);
-
   }
 }
